@@ -1,0 +1,229 @@
+import React, { useState, useEffect } from 'react';
+import { 
+  Code2, 
+  Cpu, 
+  Layers, 
+  Github, 
+  ExternalLink, 
+  ShieldAlert, 
+  Zap,
+  ChevronRight,
+  Menu,
+  X,
+  Smartphone,
+  Send,
+  Lock
+} from 'lucide-react';
+
+const App = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const services = [
+    { 
+      title: "Web & Mobile Dev", 
+      icon: <Smartphone />, 
+      details: "High-performance cross-platform applications and scalable web systems." 
+    },
+    { 
+      title: "Android Security", 
+      icon: <ShieldAlert />, 
+      details: "Deep-level application auditing, vulnerability research, and hardening." 
+    },
+    { 
+      title: "Reverse Engineering", 
+      icon: <Lock />, 
+      details: "Binary analysis, deobfuscation, and protocol reconstruction." 
+    }
+  ];
+
+  const NavLink = ({ href, children, onClick }) => (
+    <a 
+      href={href} 
+      onClick={onClick}
+      className="hover:text-yellow-400 transition-colors duration-200 font-mono text-xs uppercase tracking-[0.2em]"
+    >
+      {children}
+    </a>
+  );
+
+  return (
+    <div className="min-h-screen bg-black text-white font-sans selection:bg-yellow-500/40">
+      {/* Background Grid Pattern */}
+      <div className="fixed inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none"></div>
+
+      {/* Navigation */}
+      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-black/95 backdrop-blur-md border-b border-yellow-500/20 py-4' : 'bg-transparent py-8'}`}>
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+          <div className="flex items-center gap-3 group cursor-pointer">
+            <div className="w-8 h-8 bg-yellow-400 flex items-center justify-center group-hover:rotate-90 transition-transform duration-500">
+              <span className="text-black font-black text-xl">N</span>
+            </div>
+            <span className="text-xl font-black tracking-tighter uppercase italic">NEUX<span className="text-yellow-400">STUDIO</span></span>
+          </div>
+
+          <div className="hidden md:flex items-center gap-10">
+            <NavLink href="#services">Services</NavLink>
+            <a href="https://github.com/Nexastudio-LTD" target="_blank" rel="noreferrer" className="text-white/60 hover:text-white transition-colors">
+              <Github className="w-5 h-5" />
+            </a>
+            <button className="bg-yellow-400 hover:bg-white text-black px-6 py-2 rounded-none font-black text-xs uppercase tracking-tighter transition-all">
+              Contact
+            </button>
+          </div>
+
+          <button className="md:hidden text-yellow-400" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X /> : <Menu />}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="fixed inset-0 z-40 bg-black flex flex-col items-center justify-center gap-10 p-6 border-b border-yellow-400">
+          <NavLink href="#services" onClick={() => setIsMenuOpen(false)}>Services</NavLink>
+          <a href="https://github.com/Nexastudio-LTD" target="_blank" rel="noreferrer" className="flex items-center gap-2 font-mono uppercase text-xs tracking-widest">
+            <Github className="w-5 h-5" /> GitHub
+          </a>
+          <a href="https://t.me/x0x7F" target="_blank" rel="noreferrer" className="flex items-center gap-2 font-mono uppercase text-xs tracking-widest">
+            <Send className="w-5 h-5" /> Telegram
+          </a>
+          <button className="bg-yellow-400 text-black px-10 py-4 font-black uppercase w-full max-w-xs">Close</button>
+        </div>
+      )}
+
+      {/* Hero Section */}
+      <section className="relative pt-48 pb-32 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 relative">
+          <div className="inline-block px-3 py-1 bg-yellow-400 text-black text-[10px] font-black uppercase tracking-[0.3em] mb-6">
+            EST. 2024 // SECURITY & DEV
+          </div>
+          
+          <h1 className="text-6xl md:text-8xl font-black mb-8 tracking-tighter uppercase leading-[0.9]">
+            We build<span className="text-yellow-400">.</span><br />
+            We break<span className="text-yellow-400">.</span><br />
+            We secure<span className="text-yellow-400">.</span>
+          </h1>
+          
+          <p className="max-w-xl text-slate-400 text-lg mb-12 leading-relaxed font-medium">
+            A specialized collective focused on modern product development and aggressive security research. 
+            From mobile architectures to kernel-level analysis.
+          </p>
+          
+          <div className="flex flex-wrap gap-4">
+            <a 
+              href="https://t.me/x0x7F" 
+              target="_blank" 
+              rel="noreferrer"
+              className="flex items-center justify-center gap-3 bg-yellow-400 text-black px-8 py-4 font-black uppercase text-xs tracking-widest hover:bg-white transition-all shadow-[6px_6px_0px_0px_rgba(255,255,255,0.2)] hover:shadow-none"
+            >
+              <Send className="w-4 h-4" /> Message @x0x7F
+            </a>
+            <a 
+              href="https://github.com/Nexastudio-LTD" 
+              target="_blank" 
+              rel="noreferrer"
+              className="flex items-center justify-center gap-3 border border-white/20 text-white px-8 py-4 font-black uppercase text-xs tracking-widest hover:bg-yellow-400 hover:text-black hover:border-yellow-400 transition-all"
+            >
+              <Github className="w-4 h-4" /> GitHub Org
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section id="services" className="py-32 bg-white/[0.02] border-y border-white/5">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-20">
+            <h2 className="text-4xl font-black uppercase tracking-tighter mb-4 italic">Core Expertise</h2>
+            <div className="w-20 h-1 bg-yellow-400"></div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {services.map((s, i) => (
+              <div key={i} className="group p-10 bg-black border border-white/10 hover:border-yellow-400 transition-all duration-500">
+                <div className="mb-8 text-yellow-400 group-hover:scale-110 transition-transform duration-500 inline-block">
+                  {React.cloneElement(s.icon, { size: 40, strokeWidth: 1.5 })}
+                </div>
+                <h3 className="text-2xl font-black mb-4 uppercase tracking-tighter">{s.title}</h3>
+                <p className="font-mono text-sm text-slate-500 leading-relaxed group-hover:text-slate-300">
+                  {s.details}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Tech Ticker */}
+      <div className="py-8 bg-yellow-400 overflow-hidden select-none">
+        <div className="flex animate-[marquee_20s_linear_infinite] whitespace-nowrap gap-12 items-center">
+          {[...Array(2)].map((_, i) => (
+            <div key={i} className="flex gap-12 items-center text-black font-black text-xs uppercase tracking-[0.5em]">
+              <span>Android Hardening</span>
+              <span>•</span>
+              <span>React Native</span>
+              <span>•</span>
+              <span>Ghidra / IDA Pro</span>
+              <span>•</span>
+              <span>Flutter</span>
+              <span>•</span>
+              <span>App Penetration Testing</span>
+              <span>•</span>
+              <span>Golang</span>
+              <span>•</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="py-20 bg-black">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start gap-12">
+          <div className="max-w-xs">
+            <span className="font-black text-2xl italic tracking-tighter block mb-6 uppercase">NEUX<span className="text-yellow-400">STUDIO</span></span>
+            <p className="text-slate-500 font-mono text-xs uppercase tracking-widest leading-loose">
+              Security-first development unit for modern digital products.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-2 gap-20">
+            <div className="flex flex-col gap-4 font-mono text-[10px] uppercase font-bold tracking-widest text-slate-500">
+              <span className="text-yellow-400 mb-2">Socials</span>
+              <a href="https://github.com/Nexastudio-LTD" className="hover:text-white transition-colors">GitHub</a>
+              <a href="https://t.me/x0x7F" className="hover:text-white transition-colors">Telegram</a>
+            </div>
+            <div className="flex flex-col gap-4 font-mono text-[10px] uppercase font-bold tracking-widest text-slate-500">
+              <span className="text-yellow-400 mb-2">Legal</span>
+              <span className="cursor-not-allowed">Privacy</span>
+              <span className="cursor-not-allowed">Terms</span>
+            </div>
+          </div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-6 mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-600 font-mono text-[10px] uppercase tracking-widest">
+          <span>&copy; {new Date().getFullYear()} NEXASTUDIO LTD. ALL RIGHTS RESERVED.</span>
+          <div className="flex items-center gap-2 text-yellow-400/50">
+            <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full animate-pulse"></div>
+            Verified Secure
+          </div>
+        </div>
+      </footer>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+      `}} />
+    </div>
+  );
+};
+
+export default App;
